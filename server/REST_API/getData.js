@@ -16,7 +16,7 @@ const connection = ()=>{
     )
 }
 
-getData.get('/apis/getData', async(req,res)=>{
+getData.get('/getData', async(req,res)=>{
     const db =await connection();
     const [houseOwner] =await db.query('select count(ID_Owner) as houseOwner from HouseOwner');
     const [visitor] = await db.query('select count(password) as visitor from visitor')
@@ -25,7 +25,7 @@ getData.get('/apis/getData', async(req,res)=>{
 })
 
 //! Get all data houseOwner, securityGuard, visitor
-getData.get('/apis/getAllData',async (req,res)=>{
+getData.get('/getAllData',async (req,res)=>{
     const db = await connection();
     const [houseOwner] = await db.query(`select * from HouseOwner`);
     const [securityGuard] =await db.query(`select * from SecurityGuard`);
@@ -34,7 +34,7 @@ getData.get('/apis/getAllData',async (req,res)=>{
 });
 
 //! Security who works that current time.
-getData.get('/apis/getSecurity', async (req, res) => {
+getData.get('/getSecurity', async (req, res) => {
     try {
         const db = await connection();
         const [result] = await db.query(`
@@ -66,6 +66,6 @@ getData.post("/getDataById",async(req, res)=>{
 });
 
 getData.post('/getDataFromTime', async(req, res)=>{
-
+    
 });
 module.exports = getData;

@@ -1,8 +1,7 @@
-import  { useState } from 'react'
+import axios from 'axios'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Background from '../assets/12.jpg'
-import axios from 'axios'
-import Swal from 'sweetalert2'
 function NewHouseOwner() {
     const [form,setForm] = useState({
         first_name:null,
@@ -34,29 +33,14 @@ function NewHouseOwner() {
                 lastName: last_name,
                 tel: tell,
             })
-            .then(()=>{
-                console.log(form);
-
-                setForm({
-                    ...form,
-                    first_name:null,
-                    last_name :null,
-                    id        :null,
-                    house_number: null,
-                    tell      :null,
-                });
-                Swal.fire('Good Job Bro!',"Saved!",'success')
-                navigate('/dashboard');
+            .then((res)=>{
+                if(res.data.message === "Insert successfully"){
+                    alert("Insert ok")
+                }else{
+                    alert("Pleas fill in data all")
+                }
+                
             })
-            .catch((err)=>{
-                console.log(err);
-                Swal.fire({
-                    icon:'error',
-                    title: 'Oops...',
-                    text:err.response.data,
-                })
-                })
-            
         }
     
    
