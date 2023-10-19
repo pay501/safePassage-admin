@@ -48,6 +48,7 @@ getData.get('/getSecurity', async (req, res) => {
     }
 });
 
+
 getData.post("/getDataById",async(req, res)=>{
     try{
         const { _id } = req.body;
@@ -62,6 +63,38 @@ getData.post("/getDataById",async(req, res)=>{
     }catch(err){
         console.log(err);
         res.json(err);
+    }
+});
+
+getData.get("/getHouseOwnerById/:id",async (req, res)=>{
+    try{
+        const db = await connection()
+        const {id} = req.params;
+        const [result] = await db.query(`select * from HouseOwner where ID_Owner = '${id}'`);
+        if(result){
+            return res.json(result[0]);
+        }else{
+            return res.json({message:"There is no user"})
+        }
+    }catch(err){
+        console.log(err);
+        res.json({message:"There is no user"})
+    }
+});
+
+getData.get("/getSecurityGuardById/:id",async (req, res)=>{
+    try{
+        const db = await connection()
+        const {id} = req.params;
+        const [result] = await db.query(`select * from SecurityGuard where ID_SeG = '${id}'`);
+        if(result){
+            return res.json(result[0]);
+        }else{
+            return res.json({message:"There is no user"})
+        }
+    }catch(err){
+        console.log(err);
+        res.json({message:"There is no user"})
     }
 });
 
