@@ -13,7 +13,7 @@ function Login() {
     const submitBtn = (e) => {
         e.preventDefault();
         if (username && password) {
-            axios.post('http://localhost:1510/apis/login', {
+            axios.post('http://localhost:1510/apis/apis/login', {
                 username, password
             }).then(res => {
                 if(res.data.message ==="Login successfully"){
