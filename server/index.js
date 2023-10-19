@@ -21,12 +21,12 @@ async function hash (){
 }
 hash() */
 
-app.use('/',login);
-app.use('/',getData);
+app.use('/apis',login);
+app.use('/apis',getData);
 //app.use('/',getSecurity);
-app.use('/api',addData);
-app.use('/',updateData);
-app.use('/',deleteData)
+app.use('/apis',addData);
+app.use('/apis',updateData);
+app.use('/apis',deleteData)
 app.listen(1510,()=>{
     console.log('server is running')
 });
