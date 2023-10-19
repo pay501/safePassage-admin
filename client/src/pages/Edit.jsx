@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import Background from '../assets/12.jpg'
 import Swal from 'sweetalert2'
-function NewHouseOwner() {
+function Edit() {
     const [form, setForm] = useState({
         first_name: "",
         last_name: "",
@@ -26,9 +26,22 @@ function NewHouseOwner() {
         console.log(form)
     };
 
+    const {ID_Owner} = useParams()
+    useEffect(()=>{
+        axios.get(`http://localhost:1510/apis/getDataById`)
+        .then((response)=>{
+            const { first_name, last_name, id, house_number, tell, } = response.data.houseOwner;
+            setForm({...form,first_name, last_name, id, house_number, tell,})
+        })
+        .catch((err)=>{
+            alert(err)
+        },[ID_Owner])
+    })
+
+
     const submit = async (e) => {
         e.preventDefault();
-        await axios.post(`http://localhost:1510/apis/addNew`, {
+        await axios.put(`http://localhost:1510/apis/updateHouseOwner/${ID_Owner}`, {
             houseNo: house_number,
             idOwner: id,
             firstName: first_name,
@@ -139,4 +152,4 @@ function NewHouseOwner() {
     )
 }
 
-export default NewHouseOwner
+export default Edit;
