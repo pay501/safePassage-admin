@@ -7,7 +7,7 @@ import car from '../assets/parking.png';
 import security from '../assets/policeman.png';
 import staff from '../assets/staff.png';
 import visitorImage from '../assets/visitors.png';
-import Navbar from "../component/Navbar";
+import Navbar from "../components/Navbar";
 import "../css/Dashboard.css";
 
 
