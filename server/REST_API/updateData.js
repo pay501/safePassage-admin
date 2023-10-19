@@ -36,7 +36,7 @@ updateData.put('/updateSecurityGuard/:id',async(req ,res)=>{
     const {firstName, lastName, tel} = req.body;
     try{
         const db = await connection();
-        await db.query(`update SecurityGuard set FirstName = ?, LastName = ?, phone_number=? where `,[firstName, lastName, tel]);
+        await db.query(`update SecurityGuard set FirstName = ?, LastName = ?, phone_number = ? where ID_SeG =?`,[firstName, lastName, tel, id]);
         res.json({message:"Update successfully"});
     }catch(err){
         console.log(err);
