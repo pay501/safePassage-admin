@@ -11,6 +11,7 @@ const menuItems = [
 
     ),
     name: 'Dashboard',
+    path:'/dashboard',
   },
   {
     icon:(
@@ -19,7 +20,8 @@ const menuItems = [
 </svg>
 
     ),
-    name:"House Owner"
+    name:"House Owner",
+    path:'/houseOwner',
   },
   {
     icon: (
@@ -29,6 +31,7 @@ const menuItems = [
 
     ),
     name: 'Visitor',
+    path:'/visiter',
   },
   {
     icon :(
@@ -37,7 +40,8 @@ const menuItems = [
 </svg>
 
     ),
-    name : 'New House Owner'
+    name : 'New House Owner',
+    path:'/new',
   },
   {
     icon:(
@@ -46,7 +50,8 @@ const menuItems = [
 </svg>
 
     ),
-    name : 'management'
+    name : 'management',
+    path:'/management',
   }
 ];
 
@@ -61,7 +66,7 @@ function Navbar() {
           <p>Menu</p>
         </div>
         {menuItems.map((menuItem, index) => (
-          <Menu key={index} icon={menuItem.icon} name={menuItem.name} />
+          <Menu key={index} icon={menuItem.icon} name={menuItem.name} path={menuItem.path}/>
         ))}
       </div>
     </div>

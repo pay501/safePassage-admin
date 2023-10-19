@@ -115,12 +115,6 @@ function Dashboard() {
               <div className=" flex items-center p-3 border-2 w-1/5 rounded-sm">
               <span className="ml-5">{currentSecurityGuard.FirstName} {currentSecurityGuard.LastName}<br />{currentSecurityGuard.ID_SeG}</span>
               </div>
-           {/*  {currentSecurityGuard.map((data, index) => (
-              <div key={index} className=" flex items-center p-3 border-2 w-1/5 rounded-sm">
-                <img src={data.image} alt="" className=" w-16 h-16 rounded-full" />
-                <span className="ml-5">{securityGuard.FirstName} <br /> Sec654235456</span>
-              </div>
-            ))} */}
           </div>
         </div>
 
