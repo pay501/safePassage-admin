@@ -24,7 +24,7 @@ hash() */
 app.use('/',login);
 app.use('/',getData);
 //app.use('/',getSecurity);
-app.use('/',addData);
+app.use('/api',addData);
 app.use('/',updateData);
 app.use('/',deleteData)
 app.listen(1510,()=>{
