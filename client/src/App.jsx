@@ -16,7 +16,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/new' element={<NewHouseOwner/>}/>
           <Route path='/management' element={<Management/>}/>
-          <Route path='/edit/:id' element={<Edit/>}/>
+          <Route path='/edit/:slug' element={<Edit/>}/>
         </Routes>
       </BrowserRouter>
     </div>
