@@ -71,6 +71,7 @@ getData.get("/getHouseOwnerById/:id",async (req, res)=>{
         const db = await connection()
         const {id} = req.params;
         const [result] = await db.query(`select * from HouseOwner where ID_Owner = '${id}'`);
+        console.log(result)
         if(result){
             return res.json(result[0]);
         }else{

@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import Swal from "sweetalert2";
+import Navbar from "../components/Navbar";
 function Management() {
   const [state,setData] = useState([]);
 
