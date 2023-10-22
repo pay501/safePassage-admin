@@ -5,16 +5,14 @@ import Background from '../assets/12.jpg'
 import Swal from 'sweetalert2'
 function Edit() {
     const [form, setForm] = useState({
-        first_name: "",
-        last_name: "",
-        id: "",
-        house_number: "",
-        tell: "",
+        FirstName: "",
+        LastName: "",
+        ID_Owner: "",
+        HouseNumber: "",
+        Tel: "",
     });
 
     const navigate = useNavigate()
-
-    const { first_name, last_name, id, house_number, tell, } = form;
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -26,37 +24,46 @@ function Edit() {
         console.log(form)
     };
 
-    const {ID_Owner} = useParams()
-    useEffect(()=>{
-        axios.get(`http://localhost:1510/apis/getDataById`)
-        .then((response)=>{
-            const { first_name, last_name, id, house_number, tell, } = response.data.houseOwner;
-            setForm({...form,first_name, last_name, id, house_number, tell,})
-        })
-        .catch((err)=>{
-            alert(err)
-        },[ID_Owner])
-    })
+    const { slug } = useParams();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                if (slug) {
+                    console.log(typeof slug);
+                    const response = await axios.get(`http://localhost:1510/apis/getHouseOwnerById/${slug}`);
+                    console.log(response.data)
+                    const { HouseNumber, ID_Owner, FirstName, LastName, Tel } = response.data;
+                    setForm({ ...form, FirstName, LastName, ID_Owner, HouseNumber, Tel });
+                }
+            } catch (error) {
+                alert(error);
+                console.log(slug);
+            }
+        };
+
+        fetchData();
+    }, [slug]);
 
 
     const submit = async (e) => {
         e.preventDefault();
-        await axios.put(`http://localhost:1510/apis/updateHouseOwner/${ID_Owner}`, {
-            houseNo: house_number,
-            idOwner: id,
-            firstName: first_name,
-            lastName: last_name,
-            tel: tell,
-        })
+        await axios.put(`http://localhost:1510/apis/updateHouseOwner/${slug}`, {
+            idOwner: form.ID_Owner,
+            firstName: form.FirstName,
+            lastName: form.LastName,
+            tel: form.Tel
+            })
             .then((res) => {
-                if (res.data.message === "Insert successfully") {
+                if (res.data.message === "update successfully") {
                     Swal.fire('Success', 'Insert ok', 'success');
                     setForm({
-                        first_name: "",
-                        last_name: "",
-                        id: "",
-                        house_number: "",
-                        tell: "",
+                        ...form,
+                        ID_Owner: form.ID_Owner,
+                        FirstName: form.FirstName,
+                        LastName: form.LastName,
+                        Tel: form.Tel,
+                        HouseNumber :form.HouseNumber,
                     })
                     navigate('/dashboard')
                 } else {
@@ -85,8 +92,8 @@ function Edit() {
                                     <br />
                                     <input
                                         type="text"
-                                        name="first_name"
-                                        value={first_name}
+                                        name="FirstName"
+                                        value={form.FirstName}
                                         onChange={handleInputChange}
                                         className=" bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bg-gray-200" id="inline-full-name"
 
@@ -97,8 +104,8 @@ function Edit() {
                                     <br />
                                     <input
                                         type="text"
-                                        name="last_name"
-                                        value={last_name}
+                                        name="LastName"
+                                        value={form.LastName}
                                         onChange={handleInputChange}
                                         className=" bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bg-gray-200" id="inline-full-name"
                                     />
@@ -109,8 +116,8 @@ function Edit() {
                                 <br />
                                 <input
                                     type="number"
-                                    name="id"
-                                    value={id}
+                                    name="ID_Owner"
+                                    value={form.ID_Owner}
                                     onChange={handleInputChange}
                                     className=" bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bg-gray-200" id="inline-full-name"
                                 />
@@ -121,8 +128,8 @@ function Edit() {
                                 <br />
                                 <input
                                     type="text"
-                                    name="house_number"
-                                    value={house_number}
+                                    name="HouseNumber"
+                                    value={form.HouseNumber}
                                     onChange={handleInputChange}
                                     className=" bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bg-gray-200" id="inline-full-name"
                                 />
@@ -132,8 +139,8 @@ function Edit() {
                                 <br />
                                 <input
                                     type="text"
-                                    name="tell"
-                                    value={tell}
+                                    name="Tel"
+                                    value={form.Tel}
                                     onChange={handleInputChange}
                                     className=" bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bg-gray-200" id="inline-full-name"
                                 />
