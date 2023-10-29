@@ -66,6 +66,23 @@ getData.post("/getDataById",async(req, res)=>{
     }
 });
 
+getData.get("/getDataByPrefix", async (req, res) => {
+    try {
+        const { prefix } = req.query; // แก้ไขเป็นการรับค่าจาก query string แทน
+        const db = await connection();
+        const [result] = await db.query(`SELECT * FROM HouseOwner WHERE HouseNumber LIKE ?`, [`${prefix}%`]);
+        if (result.length > 0) {
+            return res.json(result);
+        } else {
+            return res.json({ message: "There is no data." });
+        }
+    } catch (err) {
+        console.log(err);
+        res.json(err);
+    }
+});
+
+
 getData.get("/getHouseOwnerById/:id",async (req, res)=>{
     try{
         const db = await connection()
