@@ -55,7 +55,7 @@ function Dashboard() {
             <span className=" text-5xl font-bold">{houseOwner}</span>
           </div>
           <div className=" flex justify-center">
-            <span className="text-xl font-bold">หลัง</span>
+            <span className="text-xl">หลัง</span>
           </div>
         </div>
 
@@ -68,14 +68,14 @@ function Dashboard() {
             <span className=" text-5xl font-bold">{houseOwner}</span>
           </div>
           <div className="  flex justify-center">
-            <span className=" text-xl font-bold">คน</span>
+            <span className=" text-xl ">คน</span>
           </div>
         </div>
 
         <div className="p-5 bg-white rounded-lg row-span-4 col-span-3 " >
           <div className=" flex items-center">
             <img src={car} alt="" className=" w-12" />
-            <span className="ml-5 text-xl font-bold">latest</span>
+            <span className="ml-5 text-xl ">latest</span>
           </div>
         </div>
 
@@ -88,7 +88,7 @@ function Dashboard() {
             <span className=" text-5xl font-bold">{visitor}</span>
           </div>
           <div className=" flex justify-center">
-            <span className=" text-xl font-bold">คน</span>
+            <span className=" text-xl ">คน</span>
           </div>
         </div>
 
@@ -101,7 +101,7 @@ function Dashboard() {
             <span className=" text-5xl font-bold">{securityGuard}</span>
           </div>
           <div className="flex justify-center">
-            <span className="text-xl font-bold">คน</span>
+            <span className="text-xl">คน</span>
           </div>
         </div>
 
@@ -124,6 +124,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-/* 
-{currentSecurityGuard.FirstName}
-{currentSecurityGuard.LastName} */
