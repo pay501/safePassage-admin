@@ -10,8 +10,6 @@ import visitorImage from '../assets/visitors.png';
 import Navbar from "../components/Navbar";
 import "../css/Dashboard.css";
 
-
-
 function Dashboard() {
   const navigate = useNavigate();
   const [houseOwner,setHouseOwner] = useState('')
