@@ -1,11 +1,10 @@
 import axios from "axios";
-import React, { useState, useContext } from "react";
-import { UserContext } from "../../context";
+import React, { useState} from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Swal from "sweetalert2";
-import House_Owner from "../pages/House_Owner";
+
 function Search_bar() {
     const [prefix, setPrefix] = useState("");
     const [searchResult, setSearchResult] = useState([]);
@@ -86,7 +85,7 @@ function Search_bar() {
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                <p>{data.HouseNumber}</p>
+                <Link to={`/house:${data.HouseNumber}`}>{data.HouseNumber}</Link>
               </th>
               <td className="px-6 py-4">
                 <p>
