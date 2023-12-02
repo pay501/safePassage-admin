@@ -8,6 +8,7 @@ import security from '../assets/policeman.png';
 import staff from '../assets/staff.png';
 import visitorImage from '../assets/visitors.png';
 import Navbar from "../components/Navbar";
+import Latest from '../components/Latest';
 import "../css/Dashboard.css";
 
 function Dashboard() {
@@ -73,8 +74,9 @@ function Dashboard() {
         <div className="p-5 bg-white rounded-lg row-span-4 col-span-3 " >
           <div className=" flex items-center">
             <img src={car} alt="" className=" w-12" />
-            <span className="ml-5 text-xl ">latest</span>
+            <span className="ml-5 text-xl ">Latest SCAN In</span>
           </div>
+          <Latest/>
         </div>
 
         <div className="p-5 bg-white rounded-lg col-span-1 row-span-2">
