@@ -34,7 +34,9 @@ addData.post('/search_date', async (req, res) => {
     try {
         const db = await connection();
         const result = await db.query(`
-            SELECT * FROM HouseHold
+        SELECT *
+        FROM HouseOwner
+        left JOIN HouseHold ON HouseOwner.HouseNumber=HouseHold.OwnerHouse
             WHERE InTime BETWEEN ? AND ?
         `, [start, end]);
 
@@ -46,5 +48,22 @@ addData.post('/search_date', async (req, res) => {
     }
 });
 
+addData.post('/search_date_visitor', async (req, res) => {
+    const { start, end } = req.body;
+    try {
+        const db = await connection();
+        const result = await db.query(`
+        SELECT *
+        FROM visitor
+        WHERE entry_time BETWEEN ? AND ?
+        ORDER BY entry_time DESC`, [start, end]);
+
+        res.json(result);
+    } catch (err) {
+        // Handle errors here
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 module.exports = addData;
