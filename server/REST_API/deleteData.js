@@ -10,7 +10,7 @@ const connection = ()=>{
             user:'admin',
             password:password,
             host:host,
-            database:'testVilla'
+            database:'Villa'
         })
     )
 };
@@ -20,7 +20,7 @@ deleteData.delete('/deleteHouseOwner/:id',async (req,res)=>{
     try{
         const {id} = req.params;
         const db = await connection();
-        await db.query(`delete from HouseOwner where ID_Owner = ?`,id)
+        await db.query(`delete from HouseOwnerData where HouseOwnerID = ?`,id)
         res.json({message:"Delete successfully"});
     }catch(err){
         console.log(err);

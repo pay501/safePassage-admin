@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
-import "../pages/Date.css";
-import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import moment from "moment";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { DateRangePicker } from "rsuite";
+import Navbar from "../components/Navbar";
+import "../pages/Date.css";
 function Visitor() {
   const [state, setData] = useState([]);
   const [date, setDate] = useState([]);
@@ -62,21 +62,21 @@ function Visitor() {
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer"
                   >
-                    <Link to={`/detail/${data.id_visitor}`}>
-                     <p className=" hover:text-blue-500 hover:font-bold">{data.license_template}</p>
+                    <Link to={`/detail/${data.VisitorID}`}>
+                     <p className=" hover:text-blue-500 hover:font-bold">{data.LicenseTemplate}</p>
                     </Link>
                   </th>
                   <td className="px-6 py-4">
-                    <p>{data.type}</p>
+                    <p>{data.Type}</p>
                   </td>
                   <td className="px-6 py-4 hidden lg:table-cell">
-                    {data.entry_time === null ?<p>-</p> :<p>{data.entry_time}</p>}
+                    {data.EntryTime === null ?<p>-</p> :<p>{data.EntryTime}</p>}
                   </td>
                   <td className="px-6 py-4 hidden lg:table-cell">
-                  {data.exit_time === null ?<p>-</p> :<p>{data.exit_time}</p>}
+                  {data.ExitTime === null ?<p>-</p> :<p>{data.ExitTime}</p>}
                   </td>
                   <td className="px-6 py-4">
-                  {data.assace_by === null ?<p>-</p> :<p>{data.assace_by}</p>}
+                  {data.VisitAt === null ?<p>-</p> :<p>{data.VisitAt}</p>}
                   </td>
                 </tr>
               ))}
@@ -125,21 +125,21 @@ function Visitor() {
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer"
                   >
-                    <Link to={`/detail/${data.id_visitor}`}>
-                     <p className=" hover:text-blue-500 hover:font-bold">{data.license_template}</p>
+                    <Link to={`/detail/${data.VisitorID}`}>
+                      <p className=" hover:text-blue-500 hover:font-bold">{data.LicenseTemplate}</p>
                     </Link>
                   </th>
                   <td className="px-6 py-4">
-                    <p>{data.type}</p>
+                    <p>{data.Type}</p>
                   </td>
                   <td className="px-6 py-4 hidden lg:table-cell">
-                    {data.entry_time === null ?<p>-</p> :<p>{data.entry_time}</p>}
+                    {data.EntryTime === null ?<p>-</p> :<p>{data.EntryTime}</p>}
                   </td>
                   <td className="px-6 py-4 hidden lg:table-cell">
-                  {data.exit_time === null ?<p>-</p> :<p>{data.exit_time}</p>}
+                  {data.ExitTime === null ?<p>-</p> :<p>{data.ExitTime}</p>}
                   </td>
                   <td className="px-6 py-4">
-                  {data.assace_by === null ?<p>-</p> :<p>{data.assace_by}</p>}
+                  {data.VisitAt === null ?<p>-</p> :<p>{data.VisitAt}</p>}
                   </td>
                 </tr>
               ))}
