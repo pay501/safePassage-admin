@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useState} from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+
 import Navbar from "../components/Navbar";
 import Swal from "sweetalert2";
 
 function Search_bar() {
     const [prefix, setPrefix] = useState("");
     const [searchResult, setSearchResult] = useState([]);
-  const navigate = useNavigate();
+  
 
   const fetchDataByPrefix = async (prefix) => {
     try {

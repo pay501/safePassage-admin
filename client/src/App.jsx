@@ -7,8 +7,8 @@ import Visitor from './pages/Visitor'
 import House_Owner from './pages/House_Owner'
 import Search_bar from './components/Search_bar'
 import Security from './pages/Security'
-import Date from './pages/Date'
 import House_relation from './pages/House_relation'
+
 function App() {
   return (
     <div>
@@ -22,8 +22,9 @@ function App() {
           <Route path='/visitor' element={<Visitor/>}/>
           <Route path='/houseOwner' element={<House_Owner/>}/>
           <Route path='/search' element={<Search_bar/>}/>
-          <Route path='/date' element={<Date/>}/>
+          
           <Route path='/house:id' element={<House_relation/>}/>
+          
         </Routes>
       </BrowserRouter>
     </div>

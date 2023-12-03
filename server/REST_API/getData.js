@@ -29,8 +29,15 @@ getData.get('/getAllData',async (req,res)=>{
     const db = await connection();
     const [houseOwner] = await db.query(`select * from HouseOwner`);
     const [securityGuard] =await db.query(`select * from SecurityGuard`);
-    const [visitor] = await db.query(`select * from visitor`);
+    const [visitor] = await db.query(`select * from visitor ORDER BY entry_time desc `);
     res.json({houseOwner,securityGuard,visitor});
+});
+
+getData.get('/getLatest',async (req,res)=>{
+    const db = await connection();
+    const [houseOwner] = await db.query(`select * from HouseHold ORDER BY INTime DESC LIMIT 5`);
+    const [visitor] = await db.query(`select * from visitor ORDER BY entry_time desc LIMIT 5`);
+    res.json({houseOwner,visitor});
 });
 
 //! Security who works that current time.
@@ -68,9 +75,9 @@ getData.post("/getDataById",async(req, res)=>{
 
 getData.get("/getDataByPrefix", async (req, res) => {
     try {
-        const { prefix } = req.query; // แก้ไขเป็นการรับค่าจาก query string แทน
+        const { prefix } = req.query;
         const db = await connection();
-        const [result] = await db.query(`SELECT * FROM HouseOwner WHERE HouseNumber LIKE ?`, [`${prefix}%`]);
+        const [result] = await db.query(`SELECT * FROM HouseOwner WHERE HouseNumber LIKE ? OR ID_Owner LIKE ? OR FirstName LIKE ? OR LastName LIKE ? OR Tel LIKE ?`, [`${prefix}%`, `${prefix}%`, `${prefix}%`, `${prefix}%`, `${prefix}%`]);
         if (result.length > 0) {
             return res.json(result);
         } else {
@@ -81,6 +88,7 @@ getData.get("/getDataByPrefix", async (req, res) => {
         res.json(err);
     }
 });
+
 
 
 getData.get("/getHouseOwnerById/:id",async (req, res)=>{
