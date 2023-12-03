@@ -11,32 +11,33 @@ const connection = ()=>{
             user:'admin',
             password:password,
             host:host,
-            database:'testVilla'
+            database:'Villa'
         })
     )
 }
 
 getData.get('/getData', async(req,res)=>{
     const db =await connection();
-    const [houseOwner] =await db.query('select count(ID_Owner) as houseOwner from HouseOwner');
-    const [visitor] = await db.query('select count(password) as visitor from visitor')
-    const [securityGuard] = await db.query('select count(ID_SeG) as securityGuard from SecurityGuard')
+    const [houseOwner] =await db.query('select count(HouseOwnerID) as houseOwner from HouseOwnerData');
+    const [visitor] = await db.query('select count(Password) as visitor from Visitor');
+    const [securityGuard] = await db.query('select count(SecurityGuardID) as securityGuard from SecurityGuard');
     res.json({visitor:visitor[0].visitor,houseOwner:houseOwner[0].houseOwner,securityGuard:securityGuard[0].securityGuard});
 })
 
 //! Get all data houseOwner, securityGuard, visitor
 getData.get('/getAllData',async (req,res)=>{
     const db = await connection();
-    const [houseOwner] = await db.query(`select * from HouseOwner`);
+    const [houseOwner] = await db.query(`select * from HouseOwnerData`);
     const [securityGuard] =await db.query(`select * from SecurityGuard`);
-    const [visitor] = await db.query(`select * from visitor ORDER BY entry_time desc `);
+    const [visitor] = await db.query(`select * from Visitor ORDER BY EntryTime desc `);
+    console.log(visitor[0])
     res.json({houseOwner,securityGuard,visitor});
 });
 
 getData.get('/getLatest',async (req,res)=>{
     const db = await connection();
-    const [houseOwner] = await db.query(`select * from HouseHold ORDER BY INTime DESC LIMIT 5`);
-    const [visitor] = await db.query(`select * from visitor ORDER BY entry_time desc LIMIT 5`);
+    const [houseOwner] = await db.query(`select * from HouseOwnerTime ORDER BY EntryTime DESC LIMIT 5`);
+    const [visitor] = await db.query(`select * from Visitor ORDER BY EntryTime desc LIMIT 5`);
     res.json({houseOwner,visitor});
 });
 
@@ -45,9 +46,10 @@ getData.get('/getSecurity', async (req, res) => {
     try {
         const db = await connection();
         const [result] = await db.query(`
-        select SecurityGuard.ID_SeG,SecurityGuard.FirstName,SecurityGuard.LastName,SecurityGuard.phone_number from SecurityGuard
-        inner join WorkTime
-        on SecurityGuard.ID_SeG = WorkTime.ID_SeG
+        select s.SecurityGuardID,s.FirstName,s.LastName,s.Tel
+        from SecurityGuard s
+        inner join WorkName w
+        on s.SecurityGuardID= w.SeG_ID;
     `)
         res.json( result[0] );
     } catch (err) {
@@ -60,7 +62,7 @@ getData.post("/getDataById",async(req, res)=>{
     try{
         const { _id } = req.body;
         const db = await connection();
-        const [id] = await db.query(`select * from HouseOwner where ID_Owner = ? or HouseNumber = ?`,[_id,_id]);
+        const [id] = await db.query(`select * from HouseOwnerData where HouseOwnerID = ? or HouseNumber = ?`,[_id,_id]);
         /* const [houseNo] = await db.query(`select * from HouseOwner where HouseNumber = ?`,_id); */
         if(id ){
             return res.json(id);
@@ -77,7 +79,7 @@ getData.get("/getDataByPrefix", async (req, res) => {
     try {
         const { prefix } = req.query;
         const db = await connection();
-        const [result] = await db.query(`SELECT * FROM HouseOwner WHERE HouseNumber LIKE ? OR ID_Owner LIKE ? OR FirstName LIKE ? OR LastName LIKE ? OR Tel LIKE ?`, [`${prefix}%`, `${prefix}%`, `${prefix}%`, `${prefix}%`, `${prefix}%`]);
+        const [result] = await db.query(`SELECT * FROM HouseOwnerData WHERE HouseNumber LIKE ? OR HouseOwnerID LIKE ? OR FirstName LIKE ? OR LastName LIKE ? OR Tel LIKE ?`, [`${prefix}%`, `${prefix}%`, `${prefix}%`, `${prefix}%`, `${prefix}%`]);
         if (result.length > 0) {
             return res.json(result);
         } else {
@@ -95,7 +97,7 @@ getData.get("/getHouseOwnerById/:id",async (req, res)=>{
     try{
         const db = await connection()
         const {id} = req.params;
-        const [result] = await db.query(`select * from HouseOwner where ID_Owner = '${id}'`);
+        const [result] = await db.query(`select * from HouseOwnerData where HouseOwnerID = '${id}'`);
         console.log(result)
         if(result){
             return res.json(result[0]);
@@ -112,7 +114,7 @@ getData.get("/getSecurityGuardById/:id",async (req, res)=>{
     try{
         const db = await connection()
         const {id} = req.params;
-        const [result] = await db.query(`select * from SecurityGuard where ID_SeG = '${id}'`);
+        const [result] = await db.query(`select * from SecurityGuard where SecurityGuardID = '${id}'`);
         if(result){
             return res.json(result[0]);
         }else{

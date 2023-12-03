@@ -11,7 +11,7 @@ const connection = ()=>{
             user:'admin',
             password:password,
             host:host,
-            database:'testVilla'
+            database:'Villa'
         })
     )
 };
@@ -22,7 +22,7 @@ updateData.put('/updateHouseOwner/:id' ,async(req, res)=>{
     const { idOwner, firstName, lastName, tel } = req.body;
     try{
         const db = await connection();
-        const [result] = await db.query(`update HouseOwner set ID_Owner = ? ,FirstName = ? ,LastName = ? ,Tel = ? where ID_Owner = ?`,[idOwner, firstName, lastName, tel, id]);
+        const [result] = await db.query(`update HouseOwnerData set HouseOwnerID = ? ,FirstName = ? ,LastName = ? ,Tel = ? where HouseOwnerID = ?`,[idOwner, firstName, lastName, tel, id]);
         res.json({message:"update successfully"});
     }catch(err){
         console.log(err);
@@ -36,7 +36,7 @@ updateData.put('/updateSecurityGuard/:id',async(req ,res)=>{
     const {firstName, lastName, tel} = req.body;
     try{
         const db = await connection();
-        await db.query(`update SecurityGuard set FirstName = ?, LastName = ?, phone_number = ? where ID_SeG =?`,[firstName, lastName, tel, id]);
+        await db.query(`update SecurityGuard set FirstName = ?, LastName = ?, Tel = ? where SecurityGuardID =?`,[firstName, lastName, tel, id]);
         res.json({message:"Update successfully"});
     }catch(err){
         console.log(err);

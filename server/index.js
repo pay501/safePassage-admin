@@ -2,8 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = process.env.PORT;
-const bcrypt = require('bcrypt');
 const login = require('./LOGIN/login');
 const getData = require('./REST_API/getData');
 const addData = require('./REST_API/addData');
