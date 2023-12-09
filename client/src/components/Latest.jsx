@@ -39,7 +39,7 @@ function Latest() {
                 />
               </svg>
             </div>
-            <p className="ml-2 font-bold">{data.OwnerHouse}</p>
+            <p className="ml-2 font-bold">{data.HouseNumber}</p>
           </div>
         ))}
       </div>
@@ -62,7 +62,7 @@ function Latest() {
                 />
               </svg>
             </div>
-            <p className="ml-2 font-bold">{data.house_no}</p>
+            <p className="ml-2 font-bold">{data.VisitAt}</p>
           </div>
         ))}
       </div>

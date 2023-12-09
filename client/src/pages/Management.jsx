@@ -74,7 +74,7 @@ function Management() {
             {state.map((data) => (
               <tr
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                key={data.ID_Owner}
+                key={data.houseOwnerID}
               >
                 <th
                   scope="row"
@@ -85,7 +85,7 @@ function Management() {
                 <td className="px-6 py-4"><p>{data.FirstName} {data.LastName}</p></td>
                 <td className="px-6 py-4 hidden lg:table-cell">
                   
-                  <p>{data.ID_Owner}</p>
+                  <p>{data.HO}</p>
                 </td>
                 <td className="px-6 py-4 hidden lg:table-cell">{data.Tel}</td>
                 <td className="px-6 py-4">
@@ -93,7 +93,7 @@ function Management() {
                 <div className=" flex">
                       <button
                         className="text-m p-2 border-solid border-2 border-gray-100 rounded bg-[#ee4a4a] text-white"
-                        onClick={()=> confirm(data.ID_Owner)}
+                        onClick={()=> confirm(data.houseOwnerID)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

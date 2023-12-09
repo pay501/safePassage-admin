@@ -7,7 +7,7 @@ function Edit() {
     const [form, setForm] = useState({
         FirstName: "",
         LastName: "",
-        ID_Owner: "",
+        HouseOwnerID: "",
         HouseNumber: "",
         Tel: "",
     });
@@ -33,23 +33,31 @@ function Edit() {
                     console.log(typeof slug);
                     const response = await axios.get(`http://localhost:1510/apis/getHouseOwnerById/${slug}`);
                     console.log(response.data)
-                    const { HouseNumber, ID_Owner, FirstName, LastName, Tel } = response.data;
-                    setForm({ ...form, FirstName, LastName, ID_Owner, HouseNumber, Tel });
+    
+                    // Check if the response data has the expected structure
+                    if (response.data && response.data.HouseNumber && response.data.HouseOwnerID && response.data.FirstName && response.data.LastName && response.data.Tel) {
+                        const { HouseNumber, HouseOwnerID, FirstName, LastName, Tel } = response.data;
+                        setForm({ ...form, FirstName, LastName, HouseOwnerID, HouseNumber, Tel });
+                    } else {
+                        // Handle the case where the response data is not as expected
+                        console.error("Invalid response data structure");
+                    }
                 }
             } catch (error) {
                 alert(error);
                 console.log(slug);
             }
         };
-
+    
         fetchData();
     }, [slug]);
+    
 
 
     const submit = async (e) => {
         e.preventDefault();
         await axios.put(`http://localhost:1510/apis/updateHouseOwner/${slug}`, {
-            idOwner: form.ID_Owner,
+            idOwner: form.HouseOwnerID,
             firstName: form.FirstName,
             lastName: form.LastName,
             tel: form.Tel
@@ -59,7 +67,7 @@ function Edit() {
                     Swal.fire('Success', 'Insert ok', 'success');
                     setForm({
                         ...form,
-                        ID_Owner: form.ID_Owner,
+                        HouseOwnerID: form.HouseOwnerID,
                         FirstName: form.FirstName,
                         LastName: form.LastName,
                         Tel: form.Tel,
@@ -116,8 +124,8 @@ function Edit() {
                                 <br />
                                 <input
                                     type="number"
-                                    name="ID_Owner"
-                                    value={form.ID_Owner}
+                                    name="HouseOwnerID"
+                                    value={form.HouseOwnerID}
                                     onChange={handleInputChange}
                                     className=" bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-bg-gray-200" id="inline-full-name"
                                 />
@@ -148,7 +156,7 @@ function Edit() {
                             <button
                                 type='submit'
                                 className="bg-blue-500 hover:bg-blue-700 border-none text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" >
-                                Create New
+                                Update
                             </button>
                         </form>
                     </div>
