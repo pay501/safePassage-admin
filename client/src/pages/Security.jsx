@@ -77,12 +77,12 @@ function Security() {
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
-                        <p>{data.ID_SeG}</p>
+                        <p>{data.SecurityGuardID}</p>
                       </th>
                       <td className="px-6 py-4"><p>{data.FirstName} {data.LastName}</p></td>
                       <td className="px-6 py-4 hidden lg:table-cell">
                         
-                        <p>{data.phone_number}</p>
+                        <p>{data.Tel}</p>
                       </td>
                       
                       
