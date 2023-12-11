@@ -30,7 +30,6 @@ getData.get('/getAllData',async (req,res)=>{
     const [houseOwner] = await db.query(`select * from HouseOwnerData`);
     const [securityGuard] =await db.query(`select * from SecurityGuard`);
     const [visitor] = await db.query(`select * from Visitor ORDER BY EntryTime desc `);
-    console.log(visitor[0])
     res.json({houseOwner,securityGuard,visitor});
 });
 
