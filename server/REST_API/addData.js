@@ -18,7 +18,19 @@ const connection =()=>{
 };
 /*addData.use(express.json()); */
 
-
+addData.post('/addNew',async (req,res)=>{
+    const { houseNo, idOwner, firstName, lastName, tel } = req.body;
+    try{
+        const db = await connection();
+        await db.query(`insert into HouseOwnerData values(?,?,?,?,?)`,[houseNo, idOwner, firstName, lastName, tel]);
+        const hash = await bcrypt.hash(idOwner, 10)
+        await db.query("INSERT into HouseOwnerLogin (UserName, Password) values( ?,?)",[ houseNo, hash] )
+        res.json({message:"Insert successfully"})
+    }catch(err){
+        console.log(err)
+        res.json({message:"Insert failed"});
+    }
+});
 
 addData.post('/search_date', async (req, res) => {
     const { start, end } = req.body;
