@@ -4,6 +4,7 @@ const addData = express.Router();
 const mysql = require('mysql2/promise');
 const password = process.env.PASSWORD;
 const host = process.env.HOST;
+const bcrypt = require("bcrypt")
 
 const connection =()=>{
     return(
@@ -22,6 +23,8 @@ addData.post('/addNew',async (req,res)=>{
     try{
         const db = await connection();
         await db.query(`insert into HouseOwnerData values(?,?,?,?,?)`,[houseNo, idOwner, firstName, lastName, tel]);
+        const hash = await bcrypt.hash(idOwner, 10)
+        await db.query("INSERT into HouseOwnerLogin (UserName, Password) values( ?,?)",[ houseNo, hash] )
         res.json({message:"Insert successfully"})
     }catch(err){
         console.log(err)

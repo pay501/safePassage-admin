@@ -30,7 +30,6 @@ login.post('/apis/login',async (req,res)=>{
             res.json({message:"Login failed"})
         }else{
             const token = jwt.sign({username},secret,{expiresIn: '1m'});
-            console.log(token)
             res.json({message:"Login successfully",token:token})
         }
     }catch(err){

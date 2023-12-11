@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Background from '../assets/12.jpg'
 import Swal from 'sweetalert2'
+import Background from '../assets/12.jpg'
 function NewHouseOwner() {
     const [form, setForm] = useState({
         first_name: "",
@@ -47,7 +47,7 @@ function NewHouseOwner() {
                     })
                     navigate('/dashboard')
                 } else {
-                    Swal.fire('Error', 'Please fill in all data', 'error');
+                    Swal.fire('Error', 'Data duplicated', 'error');
                 }
 
             })
