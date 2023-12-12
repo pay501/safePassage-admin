@@ -1,16 +1,18 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Swal from 'sweetalert2'
 import Background from '../assets/12.jpg'
+import Swal from 'sweetalert2'
 function NewHouseOwner() {
     const [form, setForm] = useState({
+
         first_name: "",
         last_name: "",
         id: "",
         house_number: "",
         tell: "",
     });
+
 
     const navigate = useNavigate()
 
@@ -47,10 +49,11 @@ function NewHouseOwner() {
                     })
                     navigate('/dashboard')
                 } else {
-                    Swal.fire('Error', 'Data duplicated', 'error');
+                    Swal.fire('Error', 'Please fill in all data', 'error');
                 }
 
             })
+
     }
 
 
@@ -134,6 +137,8 @@ function NewHouseOwner() {
                     </div>
                 </div>
             </div>
+
+
 
         </div>
     )

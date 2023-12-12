@@ -93,14 +93,14 @@ function Search_bar() {
                 </p>
               </td>
               <td className="px-6 py-4 hidden lg:table-cell">
-                <p>{data.ID_Owner}</p>
+                <p>{data.HouseOwnerID}</p>
               </td>
               <td className="px-6 py-4 hidden lg:table-cell">{data.Tel}</td>
               <td className="px-6 py-4">
                 <div className=" flex">
                   <button
                     className="text-m p-2 border-solid border-2 border-gray-100 rounded bg-[#ee4a4a] text-white hover:bg-red-700"
-                    onClick={() => confirm(data.ID_Owner)}
+                    onClick={() => confirm(data.HouseOwnerID)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +119,7 @@ function Search_bar() {
                   </button>
                   <Link
                     className="text-m p-2 border-solid border-2 border-gray-100 rounded"
-                    to={`/edit/${data.ID_Owner}`}
+                    to={`/edit/${data.HouseOwnerID}`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
