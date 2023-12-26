@@ -5,7 +5,7 @@ import NewHouseOwner from './pages/NewHouseOwner'
 import Edit from './pages/Edit'
 import Visitor from './pages/Visitor'
 import House_Owner from './pages/House_Owner'
-import Search_bar from './components/Search_bar'
+import Search_bar from './pages/Search_bar'
 import Security from './pages/Security'
 import House_relation from './pages/House_relation'
 

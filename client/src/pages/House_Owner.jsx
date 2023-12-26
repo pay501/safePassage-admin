@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Swal from "sweetalert2";
-import Search_bar from "../components/Search_bar";
+import Search_bar from "./Search_bar";
 import { UserContext } from "../../context";
 function House_Owner() {
   const [data,setData] = useState([]);

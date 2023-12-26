@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState} from "react";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Swal from "sweetalert2";
 
@@ -9,7 +9,7 @@ function Search_bar() {
     const [prefix, setPrefix] = useState("");
     const [searchResult, setSearchResult] = useState([]);
   
-
+    const navigate = useNavigate()
   const fetchDataByPrefix = async (prefix) => {
     try {
       const response = await axios.get(
@@ -50,6 +50,17 @@ function Search_bar() {
       }
     });
   };
+
+  const deleteData = async (id)=>{
+    await axios.delete(`http://localhost:1510/apis/deleteHouseOwner/${id}`,)
+    .then((response)=>{
+      Swal.fire("DELETED!", response.data.message, "success");
+      navigate('/dashboard')
+    })
+    .catch((err)=>{
+      Swal.fire("Unsuccess!", response.data.message,"error");
+    })
+  }
 
   const result = () => {
     return (
